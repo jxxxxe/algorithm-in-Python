@@ -1,20 +1,23 @@
+#for문 안에서 어떤 짓을 해도 for문의 i는 자기 갈길을 간다.(한번 돌 때마다 +1 된다는 말)
 import sys
 
-N=int(sys.stdin.readline().strip())
-M=int(sys.stdin.readline().strip())
-IOIs=sys.stdin.readline().strip()
+N=int(input().strip())
+M=int(input().strip())
+S=sys.stdin.readline().strip()
 
-length=N+N-1+2
-start,count=0,0
-for i in range(1,M):
-    if IOIs[i-1]==IOIs[i]:
-        if i-start>=length:
-            if IOIs[start]=='O':
-                start+=1
-            if IOIs[i-1]=='O':
-                i-=1
-            count+=i-start-length+1
-            print(start,i,count)
-        start=i
+count_O=0
+count=0
+i=1
+while i<M:
+    if S[i-1]=='I':
+        while i<M and S[i-1]!=S[i]:
+            if S[i]=='O':
+                count_O+=1
+            i+=1
+        if count_O>2 and S[i-1]=='O' and S[i]=='O':
+            count_O-=2
+        count+=count_O-N+1
+        count_O=0
+    i+=1
 
 print(count)
