@@ -8,15 +8,17 @@ S=sys.stdin.readline().strip()
 count_O=0
 count=0
 i=1
-while i<M:
-    if S[i-1]=='I':
-        while i<M and S[i-1]!=S[i]:
+while i<M-1:
+    if S[i]=='I':
+        while i<M-1 and S[i]!=S[i+1]:
             if S[i]=='O':
                 count_O+=1
             i+=1
-        if count_O>2 and S[i-1]=='O' and S[i]=='O':
-            count_O-=2
-        count+=count_O-N+1
+        if count_O>0:
+            if S[i]=='O':
+                count_O-=1
+            if count_O>=N:
+                count+=count_O-N+1
         count_O=0
     i+=1
 
