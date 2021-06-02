@@ -6,9 +6,10 @@ match={}
 num=9
 words.sort(reverse=True,key=len)
 max_len=len(words[0])
-for word in words:
-    word.rjulst(max_len,'')
-print(words)
+
+for col in range(N):
+    for row in range(max_len):
+
 
 for i in range(N):
     for j in range(len(words[i])):

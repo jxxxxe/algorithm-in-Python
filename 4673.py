@@ -1,6 +1,6 @@
-selfnum=set(range(1,100))
+selfnum=set(range(1,10001))
 
-for cre in range(1,100):
+for cre in range(1,10001):
     result=cre
     for c in str(cre):
         result+=int(c)
