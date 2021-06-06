@@ -10,7 +10,12 @@ for _ in range(T):
         score,meet=map(int,sys.stdin.readline().split())
         rank.append((score,meet))
 
-    for i in range(1,N+1):
-        for r in rank:
-            if r[1]>i and r[0]>i:
+    i=0
+    rsort_rank=sorted(rank)[::-1]
+    for r in rsort_rank:
+        i+=1
+        for j in range(i,N):
+            if r[1]>rsort_rank[j][1]:
                 count-=1
+                break
+    print(count)
