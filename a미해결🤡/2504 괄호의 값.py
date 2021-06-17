@@ -1,9 +1,33 @@
-A,B=map(int,input().split())
+def check(t,score):
+    if type(stack[-1])==int:
+        if stack[-2]==t:
+            num=stack.pop()
+            stack[-1]=score*num
+            if type(stack[-2])==int:
+                num=stack.pop()
+                stack[-1]+=num
+            return 1
+    if stack[-1]==t:
+            stack.pop()
+            stack.append(score)
+            return 1
+    return 0
 
-if A>B:
-    B,A=A,B
+X,stack=input(),[]
 
-jari=B%A if B%A!=0 else A
+for x in X:
+    if x=='(':
+        stack.append('(')
+    elif x=='[':
+        stack.append('[')
+    elif x==')':
+        if not check('(',2):
+            exit()
+    elif x==']':
+        if not check('[',3):
+            exit()
 
-for _ in range(jari):
-    print(1,end='')
+if len(stack)==1 and type(stack[-1])==int:
+    print(stack.pop())
+else:
+    print(0)
