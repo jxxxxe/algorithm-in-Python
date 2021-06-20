@@ -13,7 +13,7 @@ div=M//N
 for i in range(len(request)):
     if request[i]<=div:
         M-=request[i]
-        div=M//(N-i)
+        div=M//(N-i-1)
     else:
-        print(M//(N-i))
+        print(div)
         break
