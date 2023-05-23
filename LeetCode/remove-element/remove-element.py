@@ -4,7 +4,6 @@ class Solution:
         for i,n in enumerate(nums):
             if n==val:
                 index+=1
-                nums[i]=0
                 continue
             nums[i-index]=n
             
