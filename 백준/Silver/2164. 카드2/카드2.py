@@ -1,11 +1,13 @@
 from collections import deque
 
 N=int(input())
-cards=deque([i for i in range(1,N+1)])
 
-while len(cards)!=1:
-    cards.popleft()
-    c=cards.popleft()
-    cards.append(c)
+cards = deque(range(N,0,-1))
 
-print(cards.pop())
+while cards:
+    card1 = cards.pop()
+    if cards:
+        card2 = cards.pop()
+        cards.appendleft(card2)
+
+print(card1)
