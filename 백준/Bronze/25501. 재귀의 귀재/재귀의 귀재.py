@@ -1,13 +1,12 @@
+
 N=int(input())
-def is_palindrome(word, left, right, count=1):
-    if left>=right:
-        return [1, count]
-    
-    if word[left] != word[right]:
-        return [0, count]
-    
-    return is_palindrome(word, left+1, right-1, count+1)
 
 for _ in range(N):
     word = input()
-    print(*is_palindrome(word, 0, len(word)-1))
+    if word == word[::-1]:
+        print(1, len(word)//2+1)
+        continue
+    for i in range(len(word)//2+1):
+        if word[i]!=word[-i-1]:
+            print(0, i+1)
+            break
