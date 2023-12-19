@@ -9,8 +9,6 @@ for _ in range(pair_count):
     graph[b-1].add(a-1)
 
 def dfs(idx):
-    if not graph[idx]:
-        return
     for computer in graph[idx]:
         if computer not in answer:
             answer.add(computer)
