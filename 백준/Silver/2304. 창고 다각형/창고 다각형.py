@@ -2,13 +2,12 @@ import sys
 
 N = int(input())
 sticks = {}
-lx, rx = sys.maxsize, -sys.maxsize
 
 for _ in range(N):
     x,y= map(int,sys.stdin.readline().split())
-    lx, rx = min(lx, x), max(rx,x)
     sticks[x]=y
 
+lx, rx = min(sticks), max(sticks)
 ly_max, ry_max = sticks[lx], sticks[rx]
 
 result=0
