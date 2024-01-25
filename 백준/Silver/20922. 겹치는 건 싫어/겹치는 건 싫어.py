@@ -3,25 +3,21 @@ from collections import deque
 N, K = map(int, input().split())
 nums = list(map(int,input().split()))
 
-idx_dic={}
+counter={}
 result = 0
 start=0
 
 for i,num in enumerate(nums):
-    if num not in idx_dic:
-        idx_dic[num] = deque([])
+    if num not in counter:
+        counter[num] = 0
 
-    idx_dic[num].append(i)
+    counter[num]+=1
 
-    if len(idx_dic[num]) == K+1:
-        result = max(result, i-start)
-        for prev_idx in range(start,idx_dic[num][0]):
-            prev_num = nums[prev_idx]
-            idx_dic[prev_num].popleft()
-        start = idx_dic[num][0]+1
-        idx_dic[num].popleft()
-else:
-    result = max(result, N-start)
+    while counter[num]>K:
+        prev_num = nums[start]
+        counter[prev_num]-=1
+        start+=1
 
+    result = max(result, i-start+1)
 
-print(result)
+print(max(result, N-start))
