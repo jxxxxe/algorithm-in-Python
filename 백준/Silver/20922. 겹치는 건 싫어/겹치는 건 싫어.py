@@ -1,5 +1,3 @@
-from collections import deque
-
 N, K = map(int, input().split())
 nums = list(map(int,input().split()))
 
@@ -20,4 +18,4 @@ for i,num in enumerate(nums):
 
     result = max(result, i-start+1)
 
-print(max(result, N-start))
+print(result)
