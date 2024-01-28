@@ -27,9 +27,6 @@ distance[0] = 0
 while q:
     dist, end = heapq.heappop(q)
 
-    if dist > distance[end]:
-        continue
-
     for i in roads[end]:
         next_end, next_diff = i[0], i[1]
         next_distance = dist+next_diff
