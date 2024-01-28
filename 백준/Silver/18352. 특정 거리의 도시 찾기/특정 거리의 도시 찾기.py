@@ -6,26 +6,25 @@ input = sys.stdin.readline
 n,m,k,x = map(int,input().split())
 
 connect = [[] for _ in range(n+1)]
-distance = [sys.maxsize]*(n+1)
+distance = {}
 
 for _ in range(m):
     start, end = map(int, input().split())
     connect[start].append(end)
 
-q = deque([(0,x)])
+q = deque([x])
 distance[x]=0
 result = []
 while q:
-    dist, end = q.popleft()
+    end = q.popleft()
 
-    if dist == k:
-        result.append(str(end))
+    if distance[end] == k:
+        result.append(end)
         continue
 
     for next_end in connect[end]:
-        next_distance = dist+1
-        if next_distance < distance[next_end]:
-            distance[next_end] = next_distance
-            q.append((next_distance,next_end))
+        if next_end not in distance:
+            distance[next_end] = distance[end]+1
+            q.append(next_end)
 
-print('\n'.join(sorted(result, key= lambda x: int(x))) if result else -1)
+print('\n'.join(list(map(str,sorted(result)))) if result else -1)
