@@ -17,12 +17,13 @@ start_city, end_city = map(int, input().split())
 def dijkstra(s,e):
     q = []
     heapq.heappush(q,(0,s))
-    costs={}
+    costs=[sys.maxsize]*(n+1)
+    costs[s]=0
 
     while q:
         cost, end = heapq.heappop(q)
 
-        if end in costs and costs[end] < cost:
+        if costs[end] < cost:
             continue
 
         if end == e:
@@ -30,7 +31,7 @@ def dijkstra(s,e):
 
         for next_end, next_cost in bus[end]:
             total_cost = next_cost+cost
-            if next_end not in costs or total_cost < costs[next_end]:
+            if total_cost < costs[next_end]:
                 costs[next_end] = total_cost
                 heapq.heappush(q, (total_cost, next_end))
 
