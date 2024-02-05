@@ -1,23 +1,18 @@
-from collections import deque
-
 s=input()
 t=input()
 
-queue=deque([t])
-while queue:
-    for _ in range(len(queue)):
-        str=queue.popleft()
+def dfs(str):
+    if str == s:
+        print(1)
+        exit()
 
-        if str == s:
-            print(1)
-            exit()
+    if len(str)==len(s):
+        return
 
-        if len(str)==len(s):
-            continue
+    if str[-1]=="A":
+        dfs(str[:-1])
+    if str[0] == "B":
+        dfs(str[:0:-1])
 
-        if str[-1]=="A":
-            queue.append(str[:-1])
-        if str[0] == "B":
-            queue.append(str[:0:-1])
-
+dfs(t)
 print(0)
