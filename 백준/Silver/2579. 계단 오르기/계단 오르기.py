@@ -3,14 +3,12 @@ import sys
 input=sys.stdin.readline
 
 n=int(input())
-steps=[0]
 
-[steps.append(int(input())) for _ in range(n)]
-dp=[0 for _ in range(n+1)]
+steps=[0]*301
+dp=[0]*301
 
-if n==1:
-    print(steps[1])
-    exit()
+for i in range(1,n+1):
+    steps[i]=int(input())
 
 dp[1], dp[2] = steps[1], steps[1]+steps[2]
 
