@@ -5,7 +5,7 @@ input=sys.stdin.readline
 n=int(input())
 nums=list(map(int,input().split()))
 nums.sort()
-answer=[0]*n
+answer=0
 
 for i in range(n):
     left, right = 0,n-1
@@ -19,11 +19,11 @@ for i in range(n):
 
         result=nums[left]+nums[right]
         if result==nums[i]:
-            answer[i]=1
+            answer+=1
             break
         elif result<nums[i]:
             left+=1
         elif result>nums[i]:
             right-=1
 
-print(sum(answer))
+print(answer)
