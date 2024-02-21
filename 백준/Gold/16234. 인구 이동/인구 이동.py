@@ -1,49 +1,48 @@
 import sys
-from collections import deque
-sys.setrecursionlimit(10**6)
-
 
 input = sys.stdin.readline
 
-n,l,r = map(int, input().split())
-graph=[list(map(int, input().split())) for _ in range(n)]
+delta = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 
-pos=[[-1,0],[0,-1],[1,0],[0,1]]
-answer=0
+N, L, R = map(int, input().split())
+A = [list(map(int, input().split())) for _ in range(N)]
+li = [[i, j] for j in range(N) for i in range(N)]
+visited = [[0] * N for _ in range(N)]
+day = 1
 
-while True:
-    mark=[[0 for _ in range(n)] for _ in range(n)]
-    num=0
-    dic={}
+while 1:
+    for _ in range(len(li)):
+        i, j = li.pop(0)
+        if visited[i][j] == day:
+            continue
 
-    def dfs(i,j,num):
-        global mark
-        global dic
-        mark[i][j]=num
-        if num not in dic:
-            dic[num]=[0,0]
-        dic[num][0]+=graph[i][j]
-        dic[num][1]+=1
+        queue = [[i, j]]
+        total = A[i][j]
+        cnt = 1
+        pos_list = [[i, j]]
+        visited[i][j] = day
 
-        for p in pos:
-            ni, nj = i+p[0], j+p[1]
-            if 0<=ni<n and 0<=nj<n and mark[ni][nj]==0 and l<=abs(graph[i][j]-graph[ni][nj])<=r:
-                dfs(ni,nj,num)
+        while queue:
+            i, j = queue.pop()
+            for dy, dx in delta:
+                if N > i+dy >= 0 and N > j+dx >= 0:
+                    if visited[i+dy][j+dx] != day:
+                        if R >= abs(A[i+dy][j+dx]-A[i][j]) >= L:
+                            total += A[i+dy][j+dx]
+                            cnt += 1
+                            visited[i+dy][j+dx] = day
+                            pos_list.append([i+dy, j+dx])
+                            queue.append([i+dy, j+dx])
+        if len(pos_list) > 1:
+            n = total // cnt
+            while pos_list:
+                i, j = pos_list.pop()
+                A[i][j] = n
+                li.append([i, j])
 
-    for i in range(n):
-        for j in range(n):
-            if mark[i][j]==0:
-                num+=1
-                dfs(i,j,num)
-
-    if num==n*n:
+    if li:
+        day += 1
+    else:
         break
 
-    answer+=1
-    
-    for i in range(n):
-        for j in range(n):
-            idx=mark[i][j]
-            graph[i][j] = dic[idx][0] // dic[idx][1]
-
-print(answer)
+print(day-1)
