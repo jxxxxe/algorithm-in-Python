@@ -6,7 +6,6 @@ stack=[]
 for s in string:
     stack.append(s)
     if s==target[-1] and stack[-len_target:]==list(target):
-        for _ in range(len_target):
-            stack.pop()
+        del stack[-len_target:]
 
 print(''.join(stack) if stack else "FRULA")
